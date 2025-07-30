@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const TrapFixOne = () => {
+const TrapFixFour = () => {
   const [count, setCount] = useState(0);
 
   // 每次渲染时，addCount 函数都会重新创建，新的 addCount 函数会捕获最新的 count 值
@@ -15,7 +15,10 @@ const TrapFixOne = () => {
 
   useEffect(() => {
     // 调用 ref.current() 时，实际调用的是最新的 addCount 函数，这个函数包含最新的 count 值
-    setInterval(() => ref.current(), 1000);
+    const timerId = setInterval(() => ref.current(), 1000);
+    return () => {
+      clearInterval(timerId);
+    };
   }, []);
 
   return (
@@ -25,4 +28,4 @@ const TrapFixOne = () => {
   );
 };
 
-export default TrapFixOne;
+export default TrapFixFour;
