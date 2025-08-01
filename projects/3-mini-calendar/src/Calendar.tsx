@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useImperativeHandle, useState } from "react";
 import "./index.css";
-import { monthNames } from ".";
 import { renderDates } from "./utils";
+import { monthNames } from ".";
+import React from "react";
 
 interface CalendarProps {
   defaultValue?: Date;
   onChange: (date: Date) => void;
 }
 
-function Calendar({ defaultValue, onChange }: CalendarProps) {
+// 第一步：定义要暴露的 API 接口
+export interface CalendarRef {
+  getDate: () => Date; // 获取当前日期的方法
+  setDate: (date: Date) => void; // 设置日期的方法
+}
+
+// 第二步：组件函数签名必须符合 ForwardRefRenderFunction
+const InternalCalendar: React.ForwardRefRenderFunction<
+  CalendarRef,
+  CalendarProps
+> = ({ defaultValue, onChange }, ref) => {
   const [date, setDate] = useState(defaultValue || new Date());
 
   const handlePrevMonth = () => {
@@ -20,6 +31,19 @@ function Calendar({ defaultValue, onChange }: CalendarProps) {
     const prevMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
     setDate(prevMonth);
   };
+
+  // 第三步：使用 useImperativeHandle 暴露方法
+  useImperativeHandle(ref, () => {
+    return {
+      getDate() {
+        return date; // 返回组件内部的 date 状态
+      },
+      setDate(date: Date) {
+        setDate(date); // 修改组件内部的 date 状态
+        onChange(date);
+      },
+    };
+  });
 
   return (
     <div className="calendar">
@@ -42,6 +66,7 @@ function Calendar({ defaultValue, onChange }: CalendarProps) {
       </div>
     </div>
   );
-}
-
+};
+// 第四步：用 React.forwardRef 包装
+const Calendar = React.forwardRef(InternalCalendar);
 export default Calendar;

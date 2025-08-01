@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Calendar from "./Calendar";
+import type { CalendarRef } from "./Calendar";
 
 function App() {
-  const [date, setDate] = useState<Date>();
+  const calendarRef = useRef<CalendarRef>(null);
+  const [myDate, setMyDate] = useState<Date>();
+
+  console.log("App component, myDate is: ", myDate);
 
   useEffect(() => {
-    alert("you choose: " + date?.toLocaleDateString());
-  }, [date]);
+    console.log(calendarRef.current?.getDate().toLocaleDateString());
+
+    setTimeout(() => {
+      calendarRef.current?.setDate(new Date(2024, 3, 1));
+    }, 3000);
+  }, []);
 
   return (
     <div className="container">
       {/* <Calendar defaultDate={new Date()} /> */}
       <Calendar
-        defaultValue={new Date("2023-3-1")}
-        onChange={setDate}
-      ></Calendar>
-      <Calendar
-        defaultValue={new Date("2023-8-15")}
-        onChange={setDate}
-      ></Calendar>
+        ref={calendarRef}
+        defaultValue={new Date("2024-8-15")}
+        onChange={setMyDate}
+      />
     </div>
   );
 }
