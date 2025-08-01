@@ -1,5 +1,5 @@
 import { useImperativeHandle, useState } from "react";
-import "./index.css";
+import "../index.css";
 import { renderDates } from "./utils";
 import { monthNames } from ".";
 import React from "react";

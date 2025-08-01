@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./index.css";
-import { monthNames } from "../index";
+import { monthNames } from "../mini-calendar/index";
 
 function Calendar() {
   const [date, setDate] = useState(new Date());

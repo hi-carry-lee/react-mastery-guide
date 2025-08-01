@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./index.css";
-import { monthNames } from "../index";
-import { renderDates } from "../utils";
+import { monthNames } from "../mini-calendar/index";
+import { renderDates } from "../mini-calendar/utils";
 
 interface CalendarProps {
   defaultValue?: Date;
