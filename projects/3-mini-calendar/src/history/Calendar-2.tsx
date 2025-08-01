@@ -1,13 +1,16 @@
 import { useState } from "react";
 import "./index.css";
-import { monthNames } from ".";
-import { renderDates } from "./utils";
+import { monthNames } from "../index";
+import { renderDates } from "../utils";
 
 interface CalendarProps {
   defaultValue?: Date;
   onChange: (date: Date) => void;
 }
 
+// 第二版的Calendar组件，实现了非受控模式：
+// 传入 defaultValue 来定义初始日期，
+// 传入 onChange 来将Calendar中选取的值，传递出去
 function Calendar({ defaultValue, onChange }: CalendarProps) {
   const [date, setDate] = useState(defaultValue || new Date());
 
