@@ -1,6 +1,6 @@
 export interface CalendarType {
   formatYear: string;
-  formatMonth: string;
+  formatYearMonth: string;
   today: string;
   month: {
     January: string;

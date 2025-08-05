@@ -1,8 +1,8 @@
 import { type CalendarType } from "./interface";
 
-const CalendarLocale: CalendarType = {
+const CalendarLocal: CalendarType = {
   formatYear: "YYYY",
-  formatMonth: "MMM YYYY",
+  formatYearMonth: "MMM YYYY",
   today: "Today",
   month: {
     January: "January",
@@ -29,4 +29,4 @@ const CalendarLocale: CalendarType = {
   },
 };
 
-export default CalendarLocale;
+export default CalendarLocal;

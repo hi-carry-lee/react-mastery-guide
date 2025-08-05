@@ -10,7 +10,7 @@ interface HeaderProps {
   nextMonthHandler: () => void;
   todayHandler: () => void;
 }
-
+// 这个组件重点关注参数
 function Header(props: HeaderProps) {
   const { curMonth, prevMonthHandler, nextMonthHandler, todayHandler } = props;
 
@@ -26,15 +26,21 @@ function Header(props: HeaderProps) {
         >
           &lt;
         </div>
+
         <div className={styles["calendar-header-value"]}>
-          {curMonth.format(CalendarContext.formatMonth)}
+          {
+            // 返回格式化后的日期
+            curMonth.format(CalendarContext.formatYearMonth)
+          }
         </div>
+
         <div
           className={styles["calendar-header-icon"]}
           onClick={nextMonthHandler}
         >
           &gt;
         </div>
+
         <button
           className={styles["calendar-header-btn"]}
           onClick={todayHandler}
