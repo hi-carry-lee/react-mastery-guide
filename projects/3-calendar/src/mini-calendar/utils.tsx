@@ -13,7 +13,8 @@ export const firstDayOfMonth = (year: number, month: number) => {
 export const renderDates = (
   date: Date,
   setDate: (date: Date) => void,
-  onChange: (date: Date) => void
+  onChange: (date: Date) => void,
+  styles: Record<string, string>
 ) => {
   const days = [];
 
@@ -27,19 +28,23 @@ export const renderDates = (
   };
 
   for (let i = 0; i < firstDay; i++) {
-    days.push(<div key={`empty-${i}`} className="empty"></div>);
+    days.push(<div key={`empty-${i}`} className={styles.empty}></div>);
   }
 
   for (let i = 1; i <= daysCount; i++) {
     if (i === date.getDate()) {
       days.push(
-        <div key={i} className="day selected" onClick={() => clickHandler(i)}>
+        <div
+          key={i}
+          className={`${styles.day} ${styles.selected}`}
+          onClick={() => clickHandler(i)}
+        >
           {i}
         </div>
       );
     } else {
       days.push(
-        <div key={i} className="day" onClick={() => clickHandler(i)}>
+        <div key={i} className={styles.day} onClick={() => clickHandler(i)}>
           {i}
         </div>
       );

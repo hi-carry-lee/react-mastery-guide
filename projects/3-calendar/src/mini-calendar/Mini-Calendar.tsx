@@ -1,5 +1,5 @@
 import { useImperativeHandle, useState } from "react";
-import "../index.css";
+import styles from "./index.module.css";
 import { renderDates } from "./utils";
 import { monthNames } from ".";
 import React from "react";
@@ -46,27 +46,27 @@ const InternalCalendar: React.ForwardRefRenderFunction<
   });
 
   return (
-    <div className="calendar">
-      <div className="header">
+    <div className={styles.calendar}>
+      <div className={styles.header}>
         <button onClick={handlePrevMonth}>&lt;</button>
         <div>
           {date.getFullYear()} 年 {monthNames[date.getMonth()]}
         </div>
         <button onClick={handleNextMonth}>&gt;</button>
       </div>
-      <div className="days">
-        <div className="day">日</div>
-        <div className="day">一</div>
-        <div className="day">二</div>
-        <div className="day">三</div>
-        <div className="day">四</div>
-        <div className="day">五</div>
-        <div className="day">六</div>
-        {renderDates(date, setDate, onChange)}
+      <div className={styles.days}>
+        <div className={styles.day}>日</div>
+        <div className={styles.day}>一</div>
+        <div className={styles.day}>二</div>
+        <div className={styles.day}>三</div>
+        <div className={styles.day}>四</div>
+        <div className={styles.day}>五</div>
+        <div className={styles.day}>六</div>
+        {renderDates(date, setDate, onChange, styles)}
       </div>
     </div>
   );
 };
 // 第四步：用 React.forwardRef 包装
-const Calendar = React.forwardRef(InternalCalendar);
-export default Calendar;
+const MiniCalendar = React.forwardRef(InternalCalendar);
+export default MiniCalendar;

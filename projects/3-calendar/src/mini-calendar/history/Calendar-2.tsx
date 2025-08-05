@@ -1,7 +1,8 @@
 import { useState } from "react";
-import "./index.css";
-import { monthNames } from "../mini-calendar/index";
-import { renderDates } from "../mini-calendar/utils";
+import "./index.module.css";
+import { monthNames } from "../index";
+import { renderDates } from "../utils";
+import styles from "../index.module.css";
 
 interface CalendarProps {
   defaultValue?: Date;
@@ -41,7 +42,7 @@ function Calendar({ defaultValue, onChange }: CalendarProps) {
         <div className="day">四</div>
         <div className="day">五</div>
         <div className="day">六</div>
-        {renderDates(date, setDate, onChange)}
+        {renderDates(date, setDate, onChange, styles)}
       </div>
     </div>
   );

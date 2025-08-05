@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Calendar, { type CalendarRef } from "./Calendar";
+import MiniCalendar, { type CalendarRef } from "./Mini-Calendar";
+import styles from "./index.module.css";
 
 const CalendarHome = () => {
   const calendarRef = useRef<CalendarRef>(null);
@@ -16,9 +17,9 @@ const CalendarHome = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {/* <Calendar defaultDate={new Date()} /> */}
-      <Calendar
+      <MiniCalendar
         ref={calendarRef}
         defaultValue={new Date("2024-8-15")}
         onChange={setMyDate}
